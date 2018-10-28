@@ -1,0 +1,84 @@
+﻿@*@model EmployeeBusinessCard.Entities.Employee*@
+@model EmployeeBusinessCard.Models.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+<h2>Update</h2>
+@using (Html.BeginForm("Update", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.Id)
+    <table class="table">
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "FirstName" })
+                @Html.ValidationMessageFor(x => x.FirstName, "", new { @style = "color:red" })
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "LastName" })
+                @Html.ValidationMessageFor(x => x.LastName, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Address, new { @class = "form-control", placeholder = "Address" })
+                @Html.ValidationMessageFor(x => x.Address, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Profession, new { @class = "form-control", placeholder = "Profession" })
+                @Html.ValidationMessageFor(x => x.Profession, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.TelNumber, new { @class = "form-control", placeholder = "TelNumber" })
+                @Html.ValidationMessageFor(x => x.TelNumber, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Website, new { @class = "form-control", placeholder = "Website" })
+                @Html.ValidationMessageFor(x => x.Website, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
+                @Html.ValidationMessageFor(x => x.Email, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="user-photo">Photo:</label>
+                <input id="user-photo" type="file" name="Photo" />
+
+                @if (!string.IsNullOrEmpty(Model.PhotoName))
+                {
+                    <img width="80" src="/EmployeeBusinessCard/uploaded-user-photos/@Model.PhotoName" />
+                    @Html.HiddenFor(x => x.PhotoName)
+                }
+                else
+                {
+                    <img width="80" src="~/images/no-photo.png" />
+                }
+
+            </td>
+
+        </tr>
+        @*<tr>
+                <td>
+                    @using (Html.BeginForm("DeletePhoto", "Employee"))
+                    {
+                        @Html.Hidden("id", Model.Photo)
+                        <input type="submit" value="Remove photo" />
+                    }
+                </td>
+            </tr>*@
+    </table>
+    <input type="submit" value="Save" />
+}

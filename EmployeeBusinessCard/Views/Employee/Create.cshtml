@@ -1,0 +1,62 @@
+﻿@model EmployeeBusinessCard.Models.EmployeeViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+<h2>Create</h2>
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="table">
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "FirstName" })
+                @Html.ValidationMessageFor(x => x.FirstName, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "LastName" })
+                @Html.ValidationMessageFor(x => x.LastName, "", new { @style = "color:red" })
+            </td>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Address, new { @class = "form-control", placeholder = "Address" })
+                @Html.ValidationMessageFor(x => x.Address, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Profession, new { @class = "form-control", placeholder = "Profession" })
+                @Html.ValidationMessageFor(x => x.Profession, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.TelNumber, new { @class = "form-control", placeholder = "TelNumber" })
+                @Html.ValidationMessageFor(x => x.TelNumber, "", new { @style = "color:red" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Website, new { @class = "form-control", placeholder = "Website" })
+                @Html.ValidationMessageFor(x => x.Website, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
+                @Html.ValidationMessageFor(x => x.Email, "", new { @style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="user-photo">Photo:</label>
+                <input id="user-photo" type="file" name="Photo" />
+
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Create user" />
+}
+
+

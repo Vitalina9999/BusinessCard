@@ -1,0 +1,98 @@
+﻿@model EmployeeSearchResultModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+@Html.ActionLink("Create user", "Create", "Employee")
+
+@using (Html.BeginForm("Search", "Employee"))
+{
+    <table class="table-bordered">
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.EmployeeSearchParameters.FirstName, null, new { placeholder = "First Name" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.EmployeeSearchParameters.LastName, null, new { placeholder = "Last Name" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.EmployeeSearchParameters.Address, null, new { placeholder = "Address" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.EmployeeSearchParameters.Profession, null, new { placeholder = "Profession" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.EmployeeSearchParameters.TelNumber, null, new { placeholder = "TelNumber" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.EmployeeSearchParameters.Website, null, new { placeholder = "Website" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(x => x.EmployeeSearchParameters.Email, null, new { placeholder = "Email" })
+            </td>
+        </tr>
+    </table>
+    <input type="submit" />
+}
+<table class="table-bordered">
+    <tr>
+        <th>Photo</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>Profession</th>
+        <th>TelNumber</th>
+        <th>Website</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var employee in Model.Employees)
+    {
+    <tr>
+        <td>
+            @if (!string.IsNullOrEmpty(employee.PhotoName))
+            {
+                <img width="80" src="/EmployeeBusinessCard/uploaded-user-photos/@employee.PhotoName" />
+            }
+            else
+            {
+                <img width="80" src="~/images/no-photo.png" />
+            }
+        </td>
+        <td>@employee.FirstName</td>
+        <td>@employee.LastName</td>
+        <td>@employee.Address</td>
+        <td>@employee.Profession</td>
+        <td>@employee.TelNumber</td>
+        <td>@employee.Website</td>
+        <td>@employee.Email</td>
+        <td>
+            @using (Html.BeginForm("Delete", "Employee"))
+            {
+                @Html.Hidden("id", employee.Id)
+
+                <input type="submit" value="Delete" />
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Update", "Employee", new { id = employee.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Show Print Version", "ShowPrintVersion", "Employee", new { id = employee.Id })
+        </td>
+    </tr>
+    }
+</table>
