@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EmployeeBusinessCard.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -66,6 +67,8 @@ namespace EmployeeBusinessCard
                     name: "default",
                     template: "{controller=Employee}/{action=Index}/{id?}");
             });
+
+            AutoMapperConfig.Init();
         }
     }
 }

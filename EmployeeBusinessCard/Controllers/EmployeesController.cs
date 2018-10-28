@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EmployeeBusinessCard.Entities;
 using EmployeeBusinessCard.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -24,30 +25,12 @@ namespace EmployeeBusinessCard.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            Microsoft.EntityFrameworkCore.DbSet<Employee> employees = _employeeDbContext.Employees;
+            List<Employee> employees = _employeeDbContext.Employees.ToList();
 
-            var employeeViewModels = new List<EmployeeViewModel>();
+            EmployeeSearchResultViewModel model = new EmployeeSearchResultViewModel();
+            model.Employees = Mapper.Map<List<EmployeeViewModel>>(employees);
 
-            foreach (var employee in employees)
-            {
-                EmployeeViewModel model = new EmployeeViewModel();
-                model.Id = employee.Id;
-                model.FirstName = employee.FirstName;
-                model.LastName = employee.LastName;
-                model.Address = employee.Address;
-                model.Profession = employee.Profession;
-                model.TelNumber = employee.TelNumber;
-                model.Website = employee.Website;
-                model.Email = employee.Email;
-                model.PhotoName = employee.PhotoName;
-
-                employeeViewModels.Add(model);
-            }
-
-            return View(new EmployeeSearchResultViewModel
-            {
-                Employees = employeeViewModels
-            });
+            return View(model);
         }
 
         [HttpPost]
@@ -116,19 +99,9 @@ namespace EmployeeBusinessCard.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            var employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == id);
+            Employee employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == id);
 
-            EmployeeViewModel model = new EmployeeViewModel();
-            model.Id = employee.Id;
-            model.FirstName = employee.FirstName;
-            model.LastName = employee.LastName;
-            model.Address = employee.Address;
-            model.Profession = employee.Profession;
-            model.TelNumber = employee.TelNumber;
-            model.Website = employee.Website;
-            model.Email = employee.Email;
-            model.PhotoName = employee.PhotoName;
-
+            EmployeeViewModel model = Mapper.Map<EmployeeViewModel>(employee);
 
             return View(model);
         }
@@ -141,13 +114,7 @@ namespace EmployeeBusinessCard.Controllers
                 var employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == model.Id);
                 if (employee != null)
                 {
-                    employee.Address = model.Address;
-                    employee.Email = model.Email;
-                    employee.FirstName = model.FirstName;
-                    employee.LastName = model.LastName;
-                    employee.Profession = model.Profession;
-                    employee.TelNumber = model.TelNumber;
-                    employee.Website = model.Website;
+                    Mapper.Map(model, employee);
 
                     if (model.Photo != null && model.Photo.Length > 0)
                     {
@@ -180,7 +147,7 @@ namespace EmployeeBusinessCard.Controllers
         [HttpPost]
         public IActionResult Search(EmployeeSearchResultViewModel model)
         {
-            var employees = _employeeDbContext.Employees.AsQueryable()
+            List<Employee> employees = _employeeDbContext.Employees.AsQueryable()
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.FirstName) || x.FirstName.Contains(model.EmployeeSearchParameters.FirstName))
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.LastName) || x.LastName.Contains(model.EmployeeSearchParameters.LastName))
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.Address) || x.Address.Contains(model.EmployeeSearchParameters.Address))
@@ -190,42 +157,17 @@ namespace EmployeeBusinessCard.Controllers
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.Website) || x.Website.Contains(model.EmployeeSearchParameters.Website)
                   ).ToList();
 
-            var employeeViewModels = new List<EmployeeViewModel>();
 
-            foreach (var employee in employees)
-            {
-                EmployeeViewModel employeeViewModel = new EmployeeViewModel();
-                employeeViewModel.Id = employee.Id;
-                employeeViewModel.FirstName = employee.FirstName;
-                employeeViewModel.LastName = employee.LastName;
-                employeeViewModel.Address = employee.Address;
-                employeeViewModel.Profession = employee.Profession;
-                employeeViewModel.TelNumber = employee.TelNumber;
-                employeeViewModel.Website = employee.Website;
-                employeeViewModel.Email = employee.Email;
-                employeeViewModel.PhotoName = employee.PhotoName;
-
-                employeeViewModels.Add(employeeViewModel);
-            }
-
-            model.Employees = employeeViewModels;
+            model.Employees = Mapper.Map<List<EmployeeViewModel>>(employees);
 
             return View("Index", model);
         }
 
         public IActionResult ShowPrintVersion(int id)
         {
-            var employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == id);
+            Employee employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == id);
 
-            EmployeeViewModel model = new EmployeeViewModel();
-            model.Id = employee.Id;
-            model.FirstName = employee.FirstName;
-            model.LastName = employee.LastName;
-            model.Address = employee.Address;
-            model.Profession = employee.Profession;
-            model.TelNumber = employee.TelNumber;
-            model.Website = employee.Website;
-            model.Email = employee.Email;
+            EmployeeViewModel model = Mapper.Map<EmployeeViewModel>(employee);
 
             return View(model);
         }
