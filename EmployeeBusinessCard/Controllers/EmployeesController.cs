@@ -57,14 +57,7 @@ namespace EmployeeBusinessCard.Controllers
         {
             if (ModelState.IsValid)
             {
-                Employee employee = new Employee();
-                employee.FirstName = model.FirstName;
-                employee.LastName = model.LastName;
-                employee.Address = model.Address;
-                employee.Email = model.Email;
-                employee.Profession = model.Profession;
-                employee.TelNumber = model.TelNumber;
-                employee.Website = model.Website;
+                Employee employee = Mapper.Map<Employee>(model);
 
                 if (model.Photo != null && model.Photo.Length > 0)
                 {
@@ -85,7 +78,6 @@ namespace EmployeeBusinessCard.Controllers
                 _employeeDbContext.Employees.Add(employee);
 
                 _employeeDbContext.SaveChanges();
-
 
                 return RedirectToAction("Index");
             }
@@ -162,7 +154,8 @@ namespace EmployeeBusinessCard.Controllers
 
             return View("Index", model);
         }
-
+        
+        [HttpGet]
         public IActionResult ShowPrintVersion(int id)
         {
             Employee employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == id);
