@@ -35,8 +35,8 @@
         </tr>
         <tr>
             <td>
-                @Html.TextBoxFor(x => x.TelNumber, new { @class = "form-control", placeholder = "TelNumber" })
-                @Html.ValidationMessageFor(x => x.TelNumber, "", new { @style = "color:red" })
+                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number" })
+                @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @style = "color:red" })
             </td>
         </tr>
 
@@ -60,7 +60,7 @@
             </td>
         </tr>
     </table>
-    <input type="submit" value="Create user" />
+    <input type="submit" class="btn btn-success" value="Create user" />
 }
 
 

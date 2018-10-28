@@ -30,7 +30,7 @@ namespace EmployeeBusinessCard.Models
         [Required(ErrorMessage = "Phone number is required")]
         [Phone(ErrorMessage = "Please enter a valid Phone No")]
         [StringLength(maximumLength: 15, MinimumLength = 1, ErrorMessage = "Length must be between 1 to 15")]
-        public string TelNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         [MaxLength(20)]

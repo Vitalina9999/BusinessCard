@@ -30,12 +30,13 @@
                 <p class="address">@Model.Address</p>
                 @Html.ValidationMessageFor(model => model.Address)
                 <p>&nbsp;</p>
-                <p><img class="phone-ico" src="~/images/Icons8-Windows-8-Mobile-Phone.ico" />@Model.TelNumber</p>
+                <p><img class="phone-ico" src="~/images/Icons8-Windows-8-Mobile-Phone.ico" />@Model.PhoneNumber</p>
                 <p><img class="web-info" src="~/images/email.ico" />@Model.Email</p>
                 <p><img class="web-info" src="~/images/globe_world_icon_0.ico" />@Model.Website</p>
             </div>
         </div>
     }
+    <p><br /></p>
     <div>
         <button class="print-page-button" onclick="window.print();">Print business cards</button>
     </div>

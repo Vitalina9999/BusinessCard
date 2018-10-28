@@ -30,7 +30,7 @@ namespace EmployeeBusinessCard.Entities
         public string Profession { get; set; }
 
         [MaxLength(50)]
-        public string TelNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [MaxLength(200)]
         public string Website { get; set; }

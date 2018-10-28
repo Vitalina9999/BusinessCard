@@ -3,8 +3,6 @@
     ViewData["Title"] = "Index";
 }
 
-@Html.ActionLink("Create user", "Create", "Employee")
-
 @using (Html.BeginForm("Search", "Employee"))
 {
     <table class="table-bordered">
@@ -44,62 +42,71 @@
             </td>
         </tr>
     </table>
-    <input type="submit" />
+    <input type="submit" class="btn btn-success" value="Search..." />
 }
-
-<div>Employees list:</div>
+<p></p>
+<p><br /></p>
+@Html.ActionLink("Create user", "Create", "Employee", null, new { @class = "btn btn-dark", role = "button" })
+<p><br /></p>
+<p><br /></p>
+<div><h2>Employees list:</h2></div>
 <div>
     @if (Model.Employees.Count > 0)
     {
-        <table class="table-bordered">
-            <tr>
-                <th>Photo</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>Profession</th>
-                <th>TelNumber</th>
-                <th>Website</th>
-                <th>Email</th>
-                <th></th>
-                <th></th>
-            </tr>
-            @foreach (var employee in Model.Employees)
-            {
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>
-                        @if (!string.IsNullOrEmpty(employee.PhotoName))
-                        {
-                            <img width="80" src="/EmployeeBusinessCard/uploaded-user-photos/@employee.PhotoName" />
-                        }
-                        else
-                        {
-                            <img width="80" src="~/images/no-photo.png" />
-                        }
-                    </td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.Address</td>
-                    <td>@employee.Profession</td>
-                    <td>@employee.TelNumber</td>
-                    <td>@employee.Website</td>
-                    <td>@employee.Email</td>
-                    <td>
-                        @using (Html.BeginForm("Delete", "Employee"))
-                        {
-                            @Html.Hidden("id", employee.Id)
-
-                            <input type="submit" value="Delete" />
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Update", "Employee", new { id = employee.Id })
-                    </td>
-                    <td>
-                        @Html.ActionLink("Show Print Version", "ShowPrintVersion", "Employee", new { id = employee.Id })
-                    </td>
+                    <th scope="col">Photo</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Profession</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Website</th>
+                    <th scope="col">Email</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var employee in Model.Employees)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(employee.PhotoName))
+                            {
+                                <img width="80" src="/EmployeeBusinessCard/uploaded-user-photos/@employee.PhotoName" />
+                            }
+                            else
+                            {
+                                <img width="80" src="~/images/no-photo.png" />
+                            }
+                        </td>
+                        <td>@employee.FirstName</td>
+                        <td>@employee.LastName</td>
+                        <td>@employee.Address</td>
+                        <td>@employee.Profession</td>
+                        <td>@employee.PhoneNumber</td>
+                        <td>@employee.Website</td>
+                        <td>@employee.Email</td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "Employee"))
+                            {
+                                @Html.Hidden("id", employee.Id)
+
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Update", "Employee", new { id = employee.Id }, new { @class = "btn btn-warning" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Show Print Version", "ShowPrintVersion", "Employee", new { id = employee.Id }, new { @class = "btn btn-info" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
 
     }

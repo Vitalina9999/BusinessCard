@@ -85,7 +85,6 @@ namespace EmployeeBusinessCard.Controllers
             {
                 return View(model);
             }
-
         }
 
         [HttpGet]
@@ -145,7 +144,7 @@ namespace EmployeeBusinessCard.Controllers
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.Address) || x.Address.Contains(model.EmployeeSearchParameters.Address))
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.Email) || x.Email.Contains(model.EmployeeSearchParameters.Email))
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.Profession) || x.Profession.Contains(model.EmployeeSearchParameters.Profession))
-                  .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.TelNumber) || x.TelNumber.Contains(model.EmployeeSearchParameters.TelNumber))
+                  .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.TelNumber) || x.PhoneNumber.Contains(model.EmployeeSearchParameters.TelNumber))
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.Website) || x.Website.Contains(model.EmployeeSearchParameters.Website)
                   ).ToList();
 
@@ -154,7 +153,7 @@ namespace EmployeeBusinessCard.Controllers
 
             return View("Index", model);
         }
-        
+
         [HttpGet]
         public IActionResult ShowPrintVersion(int id)
         {
