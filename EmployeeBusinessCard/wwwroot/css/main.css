@@ -1,18 +1,16 @@
 ﻿@media print {
-    #printPageButton {
+    .print-page-button, .home-page-link {
         display: none;
-    }
+    }       
 
     body {
         padding: 0;
         margin: 0;
     }
-
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    
 }
 
 .column-left {
@@ -45,4 +43,32 @@ body {
     display: flex;
     height: 200px;
     display: inline-block;
+}
+
+
+.first-name {
+    text-transform: uppercase;
+}
+
+.last-name {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profession {
+    font-size: 8pt;
+}
+
+.address {
+    font-weight: bold;
+}
+
+.phone-ico {
+    width: 8px;
+    margin-right: 3px;
+}
+
+.web-info {
+    width: 11px;
+    margin-right: 3px;
 }

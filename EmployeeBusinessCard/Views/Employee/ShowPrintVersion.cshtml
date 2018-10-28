@@ -1,50 +1,43 @@
-﻿@model EmployeeBusinessCard.Entities.Employee
+﻿@model EmployeeBusinessCard.Models.EmployeeViewModel
 
 @{
     Layout = null;
 }
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Print Version</title>
-    @*<script src=@Url.Content("~/css/StyleSheet.css")" rel=stylesheet" type="text/javascript"></script>*@
-    <link href="@Url.Content("~/css/StyleSheet.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/main.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <div class="home-page-link">
+        @Html.ActionLink("Go to home page", "Index", "Employee")
+        <p></p>
+    </div>
     @for (int i = 0; i < 10; i++)
     {
         <div class="card">
             <div class="column-left">
-                @*<p style="text-transform: uppercase;">Paul</p>*@
-                <p style="text-transform: uppercase;">@Model.FirstName</p>
+                <p class="first-name">@Model.FirstName</p>
                 @Html.ValidationMessageFor(model => model.FirstName)
-                @*<p style="font-weight:bold; text-transform: uppercase;">Waulson</p>*@
-                <p style="font-weight:bold; text-transform: uppercase;">@Model.LastName</p>
+                <p class="last-name">@Model.LastName</p>
                 @Html.ValidationMessageFor(model => model.LastName)
-                @*<p style="font-size:8pt;">Web developer / Art</p>*@
-                <p style="font-size:8pt;">@Model.Profession</p>
+                <p class="profession">@Model.Profession</p>
                 @Html.ValidationMessageFor(model => model.Profession)
             </div>
             <div class="column-right">
-                @*<p style="font-weight:bold;">1234 Avenue, Strate, Melbourne, Australia</p>*@
-                <p style="font-weight:bold;">@Model.Address</p>
+                <p class="address">@Model.Address</p>
                 @Html.ValidationMessageFor(model => model.Address)
                 <p>&nbsp;</p>
-                <p><img style="width:8px;" src="~/images/Icons8-Windows-8-Mobile-Phone.ico" /> c</p>
-                @*<p><img style="width: 11px; margin-right: 3px;" src="~/images/email.ico" />dddd@ss.gg</p>*@
-                <p><img style="width: 11px; margin-right: 3px;" src="~/images/email.ico" />@Model.Email</p>
-                @*<p><img style="width: 11px; margin-right: 3px;" src="~/images/globe_world_icon_0.ico" />www.ddddd.com</p>*@
-                <p><img style="width: 11px; margin-right: 3px;" src="~/images/globe_world_icon_0.ico" />@Model.Website</p>
+                <p><img class="phone-ico" src="~/images/Icons8-Windows-8-Mobile-Phone.ico" />@Model.TelNumber</p>
+                <p><img class="web-info" src="~/images/email.ico" />@Model.Email</p>
+                <p><img class="web-info" src="~/images/globe_world_icon_0.ico" />@Model.Website</p>
             </div>
         </div>
     }
     <div>
-        <button id="printPageButton" onclick="window.print();">print</button>
+        <button class="print-page-button" onclick="window.print();">Print business cards</button>
     </div>
-
 </body>
 </html>

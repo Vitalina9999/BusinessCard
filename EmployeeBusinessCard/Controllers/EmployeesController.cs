@@ -14,12 +14,6 @@ namespace EmployeeBusinessCard.Controllers
 {
     public class EmployeeController : Controller
     {
-
-        //path = Path.Combine(
-        //                    Directory.GetCurrentDirectory(),
-        //                    @"C:\Files\Projects\EmployeeBusinessCard\EmployeeBusinessCard\wwwroot\uploaded-user-photos\");
-
-
         private EmployeeDbContext _employeeDbContext;
 
         public EmployeeController(EmployeeDbContext employeeDbContext)
@@ -50,7 +44,7 @@ namespace EmployeeBusinessCard.Controllers
                 employeeViewModels.Add(model);
             }
 
-            return View(new EmployeeSearchResultModel
+            return View(new EmployeeSearchResultViewModel
             {
                 Employees = employeeViewModels
             });
@@ -76,7 +70,7 @@ namespace EmployeeBusinessCard.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(EmployeeViewModel model) // (Employee model)
+        public IActionResult Create(EmployeeViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -184,7 +178,7 @@ namespace EmployeeBusinessCard.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(EmployeeSearchResultModel model)
+        public IActionResult Search(EmployeeSearchResultViewModel model)
         {
             var employees = _employeeDbContext.Employees.AsQueryable()
                   .Where(x => string.IsNullOrEmpty(model.EmployeeSearchParameters.FirstName) || x.FirstName.Contains(model.EmployeeSearchParameters.FirstName))
@@ -214,35 +208,26 @@ namespace EmployeeBusinessCard.Controllers
                 employeeViewModels.Add(employeeViewModel);
             }
 
+            model.Employees = employeeViewModels;
+
             return View("Index", model);
         }
 
         public IActionResult ShowPrintVersion(int id)
         {
-            var employee = _employeeDbContext.Employees.First(x => x.Id == id);
+            var employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == id);
 
-            return View(employee);
+            EmployeeViewModel model = new EmployeeViewModel();
+            model.Id = employee.Id;
+            model.FirstName = employee.FirstName;
+            model.LastName = employee.LastName;
+            model.Address = employee.Address;
+            model.Profession = employee.Profession;
+            model.TelNumber = employee.TelNumber;
+            model.Website = employee.Website;
+            model.Email = employee.Email;
+
+            return View(model);
         }
-        //[HttpPost]
-        //public IActionResult DeletePhoto(Employee model)
-        //{
-        //    var employee = _employeeDbContext.Employees.FirstOrDefault(x => x.Id == model.Id);
-
-        //    if (model.Photo.Length > 0)
-        //    {
-        //        using (var stream = new FileStream(
-        //            @"C:\Files\Projects\EmployeeBusinessCard\EmployeeBusinessCard\wwwroot\uploaded-user-photos\" + model.Photo.FileName,
-        //            FileMode.Create))
-        //        {
-        //            model.Photo.CopyTo(stream);
-        //            employee.PhotoName = model.Photo.FileName;
-        //        }
-
-        //        _employeeDbContext.Employees.Update(employee);
-
-        //        _employeeDbContext.SaveChanges();
-        //    }
-        //    return RedirectToAction("Index");
-        //}
     }
 }

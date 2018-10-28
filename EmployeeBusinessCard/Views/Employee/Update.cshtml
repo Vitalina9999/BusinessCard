@@ -5,6 +5,10 @@
     ViewData["Title"] = "Update";
 }
 <h2>Update</h2>
+<div>
+    @Html.ActionLink("Go to home page", "Index", "Employee")
+</div>
+<p></p>
 @using (Html.BeginForm("Update", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.Id)

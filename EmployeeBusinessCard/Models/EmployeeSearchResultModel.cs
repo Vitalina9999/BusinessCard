@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace EmployeeBusinessCard.Models
 {
-    public class EmployeeSearchResultModel
+    public class EmployeeSearchResultViewModel
     {
         public IList<EmployeeViewModel> Employees { get; set; }
          
-        public EmployeeViewModel EmployeeSearchParameters { get; set; }
+        public EmployeeSearchViewModel EmployeeSearchParameters { get; set; }
     }
 }

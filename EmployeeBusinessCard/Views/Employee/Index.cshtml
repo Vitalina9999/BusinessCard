@@ -1,4 +1,4 @@
-﻿@model EmployeeSearchResultModel
+﻿@model EmployeeSearchResultViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -46,53 +46,65 @@
     </table>
     <input type="submit" />
 }
-<table class="table-bordered">
-    <tr>
-        <th>Photo</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Address</th>
-        <th>Profession</th>
-        <th>TelNumber</th>
-        <th>Website</th>
-        <th>Email</th>
-        <th></th>
-        <th></th>
-    </tr>
-    @foreach (var employee in Model.Employees)
-    {
-    <tr>
-        <td>
-            @if (!string.IsNullOrEmpty(employee.PhotoName))
-            {
-                <img width="80" src="/EmployeeBusinessCard/uploaded-user-photos/@employee.PhotoName" />
-            }
-            else
-            {
-                <img width="80" src="~/images/no-photo.png" />
-            }
-        </td>
-        <td>@employee.FirstName</td>
-        <td>@employee.LastName</td>
-        <td>@employee.Address</td>
-        <td>@employee.Profession</td>
-        <td>@employee.TelNumber</td>
-        <td>@employee.Website</td>
-        <td>@employee.Email</td>
-        <td>
-            @using (Html.BeginForm("Delete", "Employee"))
-            {
-                @Html.Hidden("id", employee.Id)
 
-                <input type="submit" value="Delete" />
+<div>Employees list:</div>
+<div>
+    @if (Model.Employees.Count > 0)
+    {
+        <table class="table-bordered">
+            <tr>
+                <th>Photo</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Profession</th>
+                <th>TelNumber</th>
+                <th>Website</th>
+                <th>Email</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var employee in Model.Employees)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(employee.PhotoName))
+                        {
+                            <img width="80" src="/EmployeeBusinessCard/uploaded-user-photos/@employee.PhotoName" />
+                        }
+                        else
+                        {
+                            <img width="80" src="~/images/no-photo.png" />
+                        }
+                    </td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.Address</td>
+                    <td>@employee.Profession</td>
+                    <td>@employee.TelNumber</td>
+                    <td>@employee.Website</td>
+                    <td>@employee.Email</td>
+                    <td>
+                        @using (Html.BeginForm("Delete", "Employee"))
+                        {
+                            @Html.Hidden("id", employee.Id)
+
+                            <input type="submit" value="Delete" />
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Update", "Employee", new { id = employee.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Show Print Version", "ShowPrintVersion", "Employee", new { id = employee.Id })
+                    </td>
+                </tr>
             }
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Update", "Employee", new { id = employee.Id })
-        </td>
-        <td>
-            @Html.ActionLink("Show Print Version", "ShowPrintVersion", "Employee", new { id = employee.Id })
-        </td>
-    </tr>
+        </table>
+
     }
-</table>
+    else
+    {
+        <text>There are no employees</text>
+    }
+</div>

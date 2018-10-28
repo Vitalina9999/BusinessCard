@@ -3,6 +3,10 @@
     ViewData["Title"] = "Create";
 }
 <h2>Create</h2>
+<div>
+    @Html.ActionLink("Go to home page", "Index", "Employee")
+</div>
+<p></p>
 @using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <table class="table">

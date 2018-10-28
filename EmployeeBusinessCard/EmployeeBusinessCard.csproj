@@ -13,9 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Employee\Delete.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Views\Employee\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
